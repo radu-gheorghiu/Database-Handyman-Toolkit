@@ -1,13 +1,13 @@
 create view vLockingSessions as
 select 
 	s_tst.session_id
-	, s_es.login_name									as [Login Name]
-	, db_name(s_tdt.database_id)						as [Database Name]
+	, s_es.login_name						as [Login Name]
+	, db_name(s_tdt.database_id)					as [Database Name]
 	, s_tdt.database_transaction_begin_time				as [Begin Time]
 	, s_tdt.database_transaction_log_bytes_used			as [Log Bytes Used]
-	, s_tdt.database_transaction_log_bytes_reserved		as [Log Bytes Reserved]
-	, s_est.text										as [T-SQL query]
-	, s_eqp.query_plan									as [Execution Plan]
+	, s_tdt.database_transaction_log_bytes_reserved			as [Log Bytes Reserved]
+	, s_est.text							as [T-SQL query]
+	, s_eqp.query_plan						as [Execution Plan]
 from sys.dm_tran_database_transactions s_tdt
 	inner join sys.dm_tran_session_transactions s_tst
 		on s_tdt.transaction_id = s_tst.transaction_id
